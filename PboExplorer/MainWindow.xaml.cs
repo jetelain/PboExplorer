@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -671,6 +672,34 @@ namespace PboExplorer
                 // Load other files
                 LoadPboList(lookup[false]);
             }
+        }
+
+        private void PboEntry_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                var element = (FrameworkElement)sender;
+                var dataContext = element.DataContext;
+                if (dataContext is PboEntry entry)
+                {
+                    var tempPath = GetTempFilePath(entry);
+                    var data = new DataObject();
+                    data.SetFileDropList(new StringCollection() { tempPath });
+                    DragDrop.DoDragDrop(element, data, DragDropEffects.Copy);
+                }
+            }
+        }
+
+        private static string GetTempFilePath(PboEntry entry)
+        {
+            string tempFilePath = Path.Combine(Path.GetTempPath(), entry.Name);
+
+            if (!File.Exists(tempFilePath))
+            {
+                entry.Extract(tempFilePath);
+            }
+
+            return tempFilePath;
         }
     }
 }

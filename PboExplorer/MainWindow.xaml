@@ -68,7 +68,11 @@
             <TabControl  Grid.Column="0">
                 <TabItem Header="PBO Files" AllowDrop="True" Drop="PboFiles_Drop">
                     <TreeView Name="PboView" ItemTemplate="{StaticResource PboTreeTemplate}" SelectedItemChanged="ShowPboEntry" VirtualizingStackPanel.IsVirtualizing="True">
-
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="TreeViewItem">
+                                <EventSetter Event="MouseMove" Handler="PboEntry_MouseMove"/>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
                     </TreeView>
 
                 </TabItem>

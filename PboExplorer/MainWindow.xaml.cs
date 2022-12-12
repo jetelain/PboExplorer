@@ -653,6 +653,17 @@ namespace PboExplorer
             return file;
         }
 
+        private void PboFiles_DragOver(object sender, DragEventArgs e)
+        {
+            // Abort drop of extracted files
+            // Drop from Explorer has Copy|Move|Link effects
+            // Drop from app has only Copy
+            if (e.Effects == DragDropEffects.Copy)
+            {
+                e.Effects = DragDropEffects.None;
+                e.Handled = true;
+            }
+        }
         private void PboFiles_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))

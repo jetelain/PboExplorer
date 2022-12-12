@@ -66,7 +66,7 @@
             </Grid.ColumnDefinitions>
 
             <TabControl  Grid.Column="0">
-                <TabItem Header="PBO Files" AllowDrop="True" Drop="PboFiles_Drop">
+                <TabItem Header="PBO Files" AllowDrop="True" Drop="PboFiles_Drop" DragOver="PboFiles_DragOver">
                     <TreeView Name="PboView" ItemTemplate="{StaticResource PboTreeTemplate}" SelectedItemChanged="ShowPboEntry" VirtualizingStackPanel.IsVirtualizing="True">
                         <TreeView.ItemContainerStyle>
                             <Style TargetType="TreeViewItem">

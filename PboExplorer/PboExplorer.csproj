@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
 	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="SharpVectors.Wpf" Version="1.8.1" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
     <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
 
@@ -29,6 +29,7 @@
     <ProjectReference Include="..\bis-file-formats\BIS.P3D\BIS.P3D.csproj" />
     <ProjectReference Include="..\bis-file-formats\BIS.PAA\BIS.PAA.csproj" />
     <ProjectReference Include="..\bis-file-formats\BIS.PBO\BIS.PBO.csproj" />
+    <ProjectReference Include="..\bis-file-formats\BIS.SQFC\BIS.SQFC.csproj" />
     <ProjectReference Include="..\bis-file-formats\BIS.WRP\BIS.WRP.csproj" />
   </ItemGroup>
 

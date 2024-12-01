@@ -388,6 +388,9 @@ namespace PboExplorer
                     case ".sqm":
                         ShowDetectConfig(entry, infos);
                         break;
+                    case ".sqfc":
+                        ShowSQFC(entry, infos);
+                        break;
                     case ".wrp":
                         ShowWRP(entry, infos);
                         break;
@@ -417,6 +420,16 @@ namespace PboExplorer
                 ShowText(e.ToString());
             }
             PropertiesGrid.ItemsSource = infos;
+        }
+
+        private void ShowSQFC(FileBase entry, List<PropertyItem> infos)
+        {
+            using (var stream = entry.GetStream())
+            {
+                var sqfc = StreamHelper.Read<BIS.SQFC.SqfcFile>(stream);
+                infos.Add(new PropertyItem("SQFC Version", sqfc.Version.ToString()));
+                ShowText(sqfc.ToString() + "\r\n\r\n\r\n-----------------\r\n\r\n\r\n" + sqfc.ToSqf().ToString());
+            }
         }
 
         private void ShowP3D(FileBase entry, List<PropertyItem> infos)

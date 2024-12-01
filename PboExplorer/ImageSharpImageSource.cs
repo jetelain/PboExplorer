@@ -157,17 +157,21 @@ namespace PboExplorer
             IntPtr buffer)
         {
             byte* pBytes = (byte*)buffer.ToPointer();
-            for (int y = 0; y < sourceRect.Height; y++)
+
+            source.ProcessPixelRows(access =>
             {
-                var row = source.GetPixelRowSpan(sourceRect.Y + y);
-                var pPixel = (Bgra32*)pBytes;
-                for (int x = 0; x < sourceRect.Width; x++)
+                for (int y = 0; y < sourceRect.Height; y++)
                 {
-                    *pPixel = row[sourceRect.X + x];
-                    pPixel++;
+                    var row = access.GetRowSpan(sourceRect.Y + y);
+                    var pPixel = (Bgra32*)pBytes;
+                    for (int x = 0; x < sourceRect.Width; x++)
+                    {
+                        *pPixel = row[sourceRect.X + x];
+                        pPixel++;
+                    }
+                    pBytes += stride;
                 }
-                pBytes += stride;
-            }
+            });
         }
 
         private void ValidateArrayAndGetInfo(
